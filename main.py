@@ -12,7 +12,7 @@ demo = gr.Interface(
     gr.Textbox(placeholder="Enter sentence here..."),
     "graph",
     examples=[
-        ["Example"],
+        "http://rdf.freebase.com/ns/aviation.aircraft", "http://rdf.freebase.com/ns/m.03jmrzx",
     ],
 )
 
