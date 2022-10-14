@@ -9,11 +9,11 @@ def test(a):
 
 
 
-with gr.Blocks(css="#test {height : 5000px ;}") as demo:
+with gr.Blocks() as demo:
     with gr.Row( elem_id='test'):
         with gr.Tab('KG Connect & Visualization'):
             examples = gr.Radio(["http://rdf.freebase.com/ns/aviation.aircraft", "http://rdf.freebase.com/ns/m.03jmrzx"])
-            graph = gr.Graph( elem_id='test')
+            graph = gr.Graph()
             examples.change(fn=test, inputs=examples, outputs=graph)
             pass
         with gr.Tab('Knowledge Extraction'):
