@@ -15,7 +15,7 @@ def main() -> None:
          maximumDamageTab.render()
       with gr.Tab('Question Answering'):
          questionAnswerTab.render()
-   demo.launch()
+   demo.launch(server_name="0.0.0.0")
 
 
 if __name__ == "__main__":
