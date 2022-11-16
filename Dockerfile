@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y git python3.9 nodejs curl python-is-python3 && \
     npm install -g pnpm && \
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.9 get-pip.pyp
+    python3.9 get-pip.py
 
 
 RUN pip install tweepy
