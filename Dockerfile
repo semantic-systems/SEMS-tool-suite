@@ -6,9 +6,10 @@ RUN apt-get update && \
     apt-get install -y git python3.9 nodejs curl python-is-python3 && \
     npm install -g pnpm && \
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.9 get-pip.py
-    pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir tweepy python-dotenv
+    python3.9 get-pip.pyp
+
+
+RUN pip install tweepy
 
 WORKDIR /usr/
 ENV NODE_OPTIONS=--max_old_space_size=4096
