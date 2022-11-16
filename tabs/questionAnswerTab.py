@@ -4,8 +4,7 @@ import requests
 
 def test(link, query):
     req = link + query + '?&lang=en'
-    response = requests.post(req)
-    print(response)
+    response = requests.get(req)
     return response
 
 
