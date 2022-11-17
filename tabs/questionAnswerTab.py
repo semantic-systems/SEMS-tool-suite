@@ -1,4 +1,4 @@
-from gradio_graph import gradio as gr
+import gradio as gr
 import requests
 
 
@@ -10,12 +10,11 @@ def test(link, query):
 
 with gr.Blocks() as questionAnswerTab:
     with gr.Row():
-        question = gr.TextArea(label='Question', value='Where is the birthplace of Angela Merkel')
+        question = gr.TextArea(
+            label='Question', value='Where is the birthplace of Angela Merkel')
         result = gr.JSON(label='Answer', interactive=False)
     with gr.Row():
-        link  =gr.Text(label="URL", value='http://localhost:8080/qa?query=')
+        link = gr.Text(label="URL", value='http://localhost:8080/qa?query=')
         qaRun = gr.Button()
 
-    qaRun.click(fn=test, inputs=[link,question], outputs=result)
-
-        
+    qaRun.click(fn=test, inputs=[link, question], outputs=result)

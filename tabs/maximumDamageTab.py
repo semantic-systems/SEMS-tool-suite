@@ -1,4 +1,4 @@
-from gradio_graph import gradio as gr
+import gradio as gr
 
 
 with gr.Blocks() as maximumDamageTab:
