@@ -4,7 +4,7 @@ import requests
 
 def test():
     response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
-    return response
+    return response.json()
    
 
 with gr.Blocks() as questionAnswerTab:
