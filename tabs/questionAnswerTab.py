@@ -3,8 +3,9 @@ import requests
 
 
 def test():
-    response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
-    return response
+    #response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
+    #return response
+    return 'test'
 
 with gr.Blocks() as questionAnswerTab:
     with gr.Row():
