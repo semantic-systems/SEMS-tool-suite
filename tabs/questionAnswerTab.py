@@ -4,9 +4,8 @@ import requests
 
 def test(link, query):
     req = link + query + '?&lang=en'
-    response = requests.get(req)
+    response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
     return response
-
 
 with gr.Blocks() as questionAnswerTab:
     with gr.Row():
@@ -15,6 +14,6 @@ with gr.Blocks() as questionAnswerTab:
         result = gr.JSON(label='Answer', interactive=False)
     with gr.Row():
         link = gr.Text(label="URL", value='http://localhost:8080/qa?query=')
-        qaRun = gr.Button()
+        qaRun = gr.Button(variant='primary')
 
-    qaRun.click(fn=test, inputs=[link, question], outputs=result)
+    qaRun.click(fn=test, inputs=None, outputs=result)
