@@ -3,8 +3,10 @@ import requests
 
 
 def test():
-    response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
-    return response.json()
+    try:
+        return requests.post('http://localhost:8080/qa?query=Where?&lang=en')
+    except Exception as e:
+        return e
    
 
 with gr.Blocks() as questionAnswerTab:
