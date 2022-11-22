@@ -2,7 +2,7 @@ import gradio as gr
 import requests
 
 
-def test(link, query):
+def test():
     req = link + query + '?&lang=en'
     response = requests.post('http://localhost:8080/qa?query=Where is the birthplace of Angela Merkel?&lang=en')
     return response
