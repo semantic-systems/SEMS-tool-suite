@@ -1,17 +1,14 @@
 import gradio as gr
 from twitter import TwitterFunctions
+import requests
 
-#knowledgeExtractionPipeline = KnowledgeExtractionPipeline()
-twitterFunctions = TwitterFunctions()
-
-# def callPipeline(inputText : str, model : str):
-#     result = knowledgeExtractionPipeline.testExtract(inputText)
-#     return result
-
+def ee(q):
+    url = 'http://localhost:5278/'
+    return requests.post(url, data={'message' : q})
 
 with gr.Blocks() as eventExtractionTab:
     # Inputs
-    gr.TextArea(label='Input text')
+    eeInputText = gr.TextArea(label='Input text', value='there was an earthquake in Hamburg last night man damn hot noodles.', interactive=True)
     with gr.Row():
         with gr.Column(scale=1):
             gr.Text(label='Query for Tweets')
@@ -19,15 +16,15 @@ with gr.Blocks() as eventExtractionTab:
                 gr.Button("Query Tweet")
                 gr.Button("Delete")
         with gr.Column(scale=1):
-            runKEButton = gr.Button("Run Event Extraction")
+            runKEButton = gr.Button("Run Event Extraction", variant='primary')
     # Results
     with gr.Row():
-        gr.Text(label='Event Type', interactive=False)
-        gr.Text(label='Arguments', interactive=False)
-        gr.Text(label='Links', interactive=False)
-    gr.Label(label='Visualization of the constructed Knowledge Graph...')
+        test = gr.Text(label='Event Type', interactive=False, visible=False)
+        gr.Text(label='Arguments', interactive=False, visible=False)
+        gr.Text(label='Links', interactive=False, visible=False)
 
     # Functions
     # getTweetButton.click(fn=twitterFunctions.getTweet, inputs=tweetQueryText, outputs=inputText)
     # deleteTextButton.click(fn=lambda:"", inputs=[], outputs=inputText)
-    # #runKEButton.click(fn=callPipeline, inputs=[inputText, dropdownKEModel], outputs=kgInJSONLD)
+    
+    runKEButton.click(fn=ee, inputs=eeInputText, outputs=test)
