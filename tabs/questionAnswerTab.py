@@ -3,7 +3,7 @@ import requests
 
 
 def qa(link, query):
-    request = link + query
+    request = link + query + '?&lang=en'
     try:
         return requests.post(request).json()
     except Exception as e:
