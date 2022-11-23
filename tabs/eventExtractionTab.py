@@ -4,7 +4,7 @@ import requests
 
 def ee(q):
     try:
-        url = 'http://localhost:5278/'
+        url = 'http://sems-kg-1.informatik.uni-hamburg.de:5278/'
         headers = {'Content-Type': 'application/json',}
         return requests.post(url, data={'message' : q}, headers=headers)
     except Exception as e:
