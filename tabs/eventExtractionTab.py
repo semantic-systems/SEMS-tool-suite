@@ -19,7 +19,7 @@ with gr.Blocks() as eventExtractionTab:
             runKEButton = gr.Button("Run Event Extraction", variant='primary')
     # Results
     with gr.Row():
-        test = gr.Text(label='Event Type', interactive=False, visible=False)
+        test = gr.Text(label='Event Type', interactive=False, visible=True)
         gr.Text(label='Arguments', interactive=False, visible=False)
         gr.Text(label='Links', interactive=False, visible=False)
 
