@@ -4,7 +4,10 @@ import requests
 
 def qa(link, query):
     request = link + query
-    return requests.post(request).json()
+    try:
+        return requests.post(request).json()
+    except Exception as e:
+        return e
     
    
 
