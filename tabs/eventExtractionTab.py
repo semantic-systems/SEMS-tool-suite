@@ -4,7 +4,11 @@ import requests
 
 def ee(q):
     url = 'http://localhost:5278/'
-    return requests.post(url, data={'message' : q})
+    try:
+        return requests.post(url, data={'message' : q})
+    except Exception as e:
+        return e
+        
 
 with gr.Blocks() as eventExtractionTab:
     # Inputs
