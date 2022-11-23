@@ -3,9 +3,10 @@ from twitter import TwitterFunctions
 import requests
 
 def ee(q):
-    url = 'http://localhost:5278/'
     try:
-        return requests.post(url, data={'message' : q})
+        url = 'http://localhost:5278/'
+        headers = {'Content-Type': 'application/json',}
+        return requests.post(url, data={'message' : q}, headers=headers)
     except Exception as e:
         return e
         
