@@ -2,11 +2,10 @@ import gradio as gr
 import requests
 
 
-def test():
-    try:
-        return requests.post('http://localhost:8080/qa?query=Where?&lang=en')
-    except Exception as e:
-        return e
+def qa(link, query):
+    request = link + query
+    return requests.post(request).json()
+    
    
 
 with gr.Blocks() as questionAnswerTab:
@@ -18,4 +17,4 @@ with gr.Blocks() as questionAnswerTab:
         link = gr.Text(label="URL", value='http://localhost:8080/qa?query=')
         qaRun = gr.Button(variant='primary')
 
-    qaRun.click(fn=test, inputs=None, outputs=result)
+    qaRun.click(fn=qa, inputs=[link, question], outputs=result)
