@@ -4,7 +4,7 @@ import requests
 
 def qa(url, q):
     try:
-        return requests.post(url, data={"query": q, "lang": "en"}).json()
+        return requests.post('http://localhost:8080/qa', data={"query": 'Where is the birthplace of Angela Merkel', "lang": "en"}).json()
     except Exception as e:
         return e
     
