@@ -4,7 +4,8 @@ import requests
 
 def qa(url, q):
     try:
-        return requests.get(url, data={"query": q, "lang": "en"}).json()
+        headers = {'Content-Type': 'application/json',}
+        return requests.post(url, data={"query": q, "lang": "en"}, headers=headers).json()
     except Exception as e:
         return e
     
