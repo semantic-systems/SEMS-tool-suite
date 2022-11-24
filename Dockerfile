@@ -10,5 +10,5 @@ COPY . ./
 RUN pip install tweepy
 ENV NODE_OPTIONS=--max_old_space_size=4096
 
-EXPOSE 7860
+EXPOSE 7861
 CMD ["venv/bin/python",  "main.py"]
