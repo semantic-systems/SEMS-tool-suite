@@ -4,9 +4,9 @@ import requests
 
 def ee(q):
     try:
-        url = 'http://127.0.0.1:5278'
-        headers = {'Content-Type': 'application/json',}
-        return requests.post(url, data={'message' : q}, headers=headers)
+        url = 'http://event_extractor:5278'
+        headers = {'Content-Type': 'application/json'}
+        return requests.post(url, json={'message': q}, headers=headers).json()
     except Exception as e:
         return e
         
@@ -24,12 +24,14 @@ with gr.Blocks() as eventExtractionTab:
             runKEButton = gr.Button("Run Event Extraction", variant='primary')
     # Results
     with gr.Row():
-        test = gr.Text(label='Event Type', interactive=False, visible=True)
-        gr.Text(label='Arguments', interactive=False, visible=False)
-        gr.Text(label='Links', interactive=False, visible=False)
+        event_type = gr.Text(label='Event Type', interactive=False, visible=True)
+        entities = gr.Text(label='Entities', interactive=False, visible=False)
+        graph = gr.Text(label='Graph', interactive=False, visible=False)
 
     # Functions
     # getTweetButton.click(fn=twitterFunctions.getTweet, inputs=tweetQueryText, outputs=inputText)
     # deleteTextButton.click(fn=lambda:"", inputs=[], outputs=inputText)
     
-    runKEButton.click(fn=ee, inputs=eeInputText, outputs=test)
+    runKEButton.click(fn=ee, inputs=eeInputText, outputs=event_type)
+    runKEButton.click(fn=ee, inputs=eeInputText, outputs=entities)
+    runKEButton.click(fn=ee, inputs=eeInputText, outputs=graph)

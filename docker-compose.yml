@@ -1,8 +1,14 @@
-version: "3.9"
+version: "3"
 
 services:
   gradio:
     restart: always
     build: .
     ports:
-      - "9101:7861"
+      - "9001:7860"
+    networks:
+      - demo_network
+
+networks:
+  demo_network:
+    external: true
