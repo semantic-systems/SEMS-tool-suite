@@ -16,11 +16,13 @@ RUN \
     apt-get -y clean
 
 COPY . /src/
-RUN pip install -r /src/requirements.txt
-WORKDIR src
+COPY --from=builder ["gradio", "/src/gradio/"]
+COPY --from=builder ["venv", "/src/venv/"]
+
+WORKDIR /src
 
 ENV NODE_OPTIONS=--max_old_space_size=4096
 
 EXPOSE 7860
-ENTRYPOINT ["python"]
+ENTRYPOINT ["/src/venv/bin/python"]
 CMD ["/src/main.py"]
