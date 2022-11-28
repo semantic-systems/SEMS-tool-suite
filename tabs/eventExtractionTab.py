@@ -8,7 +8,7 @@ def ee(q):
         output = requests.post(url, json={'message': q}, headers=headers).json()
         return output.get('event type'), output.get('event arguments'), output.get('event graph')
     except Exception as e:
-        return e
+        return e,e,e
 
 examples=[
     "A preliminary 6.20 magnitude #earthquake has occurred near Taft, Eastern Visayas, #Philippines.",
