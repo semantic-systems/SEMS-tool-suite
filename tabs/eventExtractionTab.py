@@ -3,7 +3,7 @@ import requests
 
 def ee(q):
     try:
-        url = 'http://event_extractor:5278'
+        url = 'http://coypu-eventextraction-event_extractor-1:5278'
         headers = {'Content-Type': 'application/json'}
         output = requests.post(url, json={'message': q}, headers=headers).json()
         return output.get('event type'), output.get('event arguments'), output.get('event graph')
