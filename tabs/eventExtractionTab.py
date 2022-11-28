@@ -5,7 +5,8 @@ def ee(q):
     try:
         url = 'http://event_extractor:5278'
         headers = {'Content-Type': 'application/json'}
-        return requests.post(url, json={'message': q}, headers=headers).json()
+        output = requests.post(url, json={'message': q}, headers=headers).json()
+        return output.get('event type'), output.get('event arguments'), output.get('event graph')
     except Exception as e:
         return e
 
