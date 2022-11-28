@@ -4,7 +4,7 @@ from tabs import *
 
 def main() -> None:
     '''main gradio function that defines all tabs'''
-    with gr.Blocks() as demo:
+    with gr.Blocks(css="#row {height: 100%}") as demo:
         with gr.Tab('KG Connect & Visualization'):
              kgVisualizationTab.render()
         with gr.Tab('Knowledge Extraction'):
