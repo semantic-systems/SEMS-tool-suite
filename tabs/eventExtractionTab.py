@@ -26,7 +26,7 @@ with gr.Blocks() as eventExtractionTab:
             input_box = gr.TextArea(label='Input text')    
             with gr.Accordion("Examples", open=False):
                 gr.Examples(examples, inputs=input_box, label='')
-            with gr.Accordion("Get examples from Twitter", open=False, visible=False):
+            with gr.Accordion("Get examples from Twitter", open=False, visible=True):
                 twitter_input_box = gr.Text(label='Query for Tweets')
                 getTweetButton = gr.Button("Query Tweet")
             with gr.Row():
