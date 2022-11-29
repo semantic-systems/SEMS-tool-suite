@@ -4,7 +4,7 @@ import requests
 
 def qa(q):
     try:
-        url = http://tebaqa-controller:8080/qa
+        url = 'http://tebaqa-controller:8080/qa'
         return requests.post(url, data={"query": q, "lang": "en"}).json()
     except Exception as e:
         return e
