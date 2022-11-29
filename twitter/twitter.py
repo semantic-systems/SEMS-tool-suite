@@ -1,6 +1,6 @@
 import tweepy, re, json
 
-with open("../twitter/twitter.json","r") as file:
+with open("./twitter/twitter.json","r") as file:
     keys = json.load(file)
 
 __auth = tweepy.OAuth1UserHandler(
