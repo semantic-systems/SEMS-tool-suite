@@ -2,8 +2,9 @@ import gradio as gr
 import requests
 
 
-def qa(url, q):
+def qa(q):
     try:
+        url = http://tebaqa-controller:8080/qa
         return requests.post(url, data={"query": q, "lang": "en"}).json()
     except Exception as e:
         return e
@@ -12,11 +13,10 @@ def qa(url, q):
 
 with gr.Blocks() as questionAnswerTab:
     with gr.Row():
-        question = gr.TextArea(
-            label='Question', value='Where is the birthplace of Angela Merkel')
-        result = gr.JSON(label='Answer', interactive=False)
-    with gr.Row():
-        link = gr.Text(label="URL", value='http://localhost:8080/qa')
-        qaRun = gr.Button(variant='primary')
+        with gr.Column():
+            question = gr.TextArea(label='Question', value='Where is the birthplace of Angela Merkel')
+            qaRun = gr.Button(variant='primary')
+        with gr.Column():
+            result = gr.JSON(label='Answer', interactive=False) 
 
-    qaRun.click(fn=qa, inputs=[link, question], outputs=result)
+    qaRun.click(fn=qa, inputs=question, outputs=result)
