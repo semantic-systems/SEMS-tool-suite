@@ -1,11 +1,17 @@
-import tweepy, re, json
+import tweepy, re, os
+from dotenv import load_dotenv
+from os.path import join, dirname
 
-with open("./twitter/twitter.json","r") as file:
-    keys = json.load(file)
+dotenv_path = join(dirname(__file__), 'twitter.env')
+load_dotenv(dotenv_path)
 
-__auth = tweepy.OAuth1UserHandler(
-    keys.get('api_key'), keys.get('api_secret'), keys.get('access_token'), keys.get('access_token_secret')
-)
+api_key = os.environ.get("api_key")
+api_secret = os.environ.get("api_secret")
+access_token = os.environ.get("access_token")
+access_token_secret = os.environ.get("access_token_secret")
+
+
+__auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
 api = tweepy.API(__auth)
 
 
