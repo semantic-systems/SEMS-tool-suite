@@ -3,5 +3,4 @@ source venv/bin/activate
 
 cd gradio_graph
 pip install -e .
-pip install tweepy
-python-dotenv
+pip install tweepy python-dotenv
