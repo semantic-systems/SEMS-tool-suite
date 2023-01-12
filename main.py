@@ -14,8 +14,6 @@ with gr.Blocks(css="#row {height: 100%}") as demo:
     #    maximumDamageTab.render()
     with gr.Tab('Question Answering'):
         questionAnswerTab.render()
-demo.launch(server_name="0.0.0.0")
-
-
+    
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(server_name="0.0.0.0")
