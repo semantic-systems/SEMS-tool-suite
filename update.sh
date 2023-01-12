@@ -1,3 +1,2 @@
-git submodule update --init --recursive
-git submodule update --recursive
+git pull
 docker compose up --build --detach
