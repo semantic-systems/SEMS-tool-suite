@@ -14,6 +14,8 @@ with gr.Blocks(css="#row {height: 100%}") as demo:
     #    maximumDamageTab.render()
     with gr.Tab('Question Answering'):
         questionAnswerTab.render()
+    with gr.Tab('ESG Event Type Detection'):
+        esgEventExtractionTab.render()
     
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0")
