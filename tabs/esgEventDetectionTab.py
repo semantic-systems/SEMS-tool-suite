@@ -4,7 +4,7 @@ from twitter import TwitterFunctions
 
 def ee(q):
     try:
-        url = 'http://esg_event_type_detector:5278'
+        url = 'http://esg_event_type_detector_container:5279'
         headers = {'Content-Type': 'application/json'}
         output = requests.post(url, json={'message': q}, headers=headers).json()
         return output.get('event type'), output.get('wikidata link')
