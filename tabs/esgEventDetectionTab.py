@@ -41,4 +41,4 @@ with gr.Blocks() as esgEventExtractionTab:
     # Functions
     getTweetButton.click(fn=TwitterFunctions.getTweet, inputs=twitter_input_box, outputs=input_box)  
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_entities, output_box_graph])
+    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_event_type_link])
