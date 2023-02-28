@@ -4,10 +4,10 @@ from twitter import TwitterFunctions
 
 def ee(q):
     try:
-        url = 'http://esg_classifier-esg-classifier-1:5006'
+        url = 'https://esg-classifier.skynet.coypu.org'
         headers = {'Content-Type': 'application/json'}
-        output = requests.post(url, json={'message': q}, headers=headers).json()
-        return output.get('event type'), output.get('wikidata link')
+        output = requests.post(url, json={'message': q, "key": "4QT4B4JNCL5SLJM5"}, headers=headers).json()
+        return output.get('label'), output.get('wikidata')
     except Exception as e:
         return e,e
 
