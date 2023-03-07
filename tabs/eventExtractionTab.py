@@ -4,7 +4,7 @@ from twitter import TwitterFunctions
 
 def ee(q):
     try:
-        url = 'http:////event_extractor_test:5278'
+        url = 'http://event_extractor_test:5278'
         headers = {'Content-Type': 'application/json'}
         output = requests.post(url, json={'message': q}, headers=headers).json()
         return output.get('event type'), output.get('event arguments'), output.get('event graph')
