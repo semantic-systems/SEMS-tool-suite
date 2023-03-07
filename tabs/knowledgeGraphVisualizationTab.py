@@ -1,6 +1,12 @@
 import gradio as gr
 
+description = """- Fetch graph by SPARQL 
+                 - Interfacing with Wikidata
+                 """
+
 with gr.Blocks() as kgVisualizationTab:
+    with gr.Row():
+        gr.Markdown(f"{description}")
     with gr.Row():
         # the onload function is used to pass the theme parameter to the iframe - kinda clunky, but it works. If someone has a better way of doing this, please let me know!
         html = gr.HTML(

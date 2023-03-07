@@ -8,6 +8,11 @@ examples=[
     "Of which country is Berlin the capital?",
     "Where is the birthplace of Angela Merkel?"
     ]
+
+description = """- Elasticsearch indexer over DBpedia
+                 - Name Entity Recognition -> Entity Linking and Relation Linking -> Query Generation"""
+
+
 def qa(question):
     try:
         url = 'http://tebaqa-controller:8080/qa-simple'
@@ -15,10 +20,11 @@ def qa(question):
         return request.get('answers'), request.get('sparql')
     except Exception as e:
         return e,e 
-    
-   
+
 
 with gr.Blocks() as questionAnswerTab:
+    with gr.Row():
+        gr.Markdown(f"{description}")
     with gr.Row():
         with gr.Column():
             question_box = gr.TextArea(label='Question')

@@ -19,6 +19,8 @@ examples=["\"One-in-100-year flood event\" devastates Western Australia",
 
 with gr.Blocks() as esgEventExtractionTab:
     with gr.Row():
+        gr.Markdown(f"- Single label classification on ESG events")
+    with gr.Row():
         # Inputs
         with gr.Column():
             input_box = gr.TextArea(label='Input text')    

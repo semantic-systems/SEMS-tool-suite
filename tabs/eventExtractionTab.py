@@ -4,7 +4,7 @@ from twitter import TwitterFunctions
 
 def ee(q):
     try:
-        url = 'http://coypu-eventextraction-event_extractor-1:5278'
+        url = 'http:////event_extractor_test:5278'
         headers = {'Content-Type': 'application/json'}
         output = requests.post(url, json={'message': q}, headers=headers).json()
         return output.get('event type'), output.get('event arguments'), output.get('event graph')
@@ -18,8 +18,13 @@ examples=[
     "One person was missing following a large explosion at an apparent industrial building in Houston Friday. The blast damaged nearby buildings and homes."
     ]
 
+description = """- Event Detector: crisis-related LM + supervised contrastive learning on TREC-IS dataset.
+                 - Entity Linker: BLINK-based linker
+                 - (paste the extracted event graph [here](https://json-ld.org/playground) to see the visualization!)"""
 
 with gr.Blocks() as eventExtractionTab:
+    with gr.Row():
+        gr.Markdown(f"{description}")
     with gr.Row():
         # Inputs
         with gr.Column():
@@ -38,10 +43,10 @@ with gr.Blocks() as eventExtractionTab:
         # Results
         with gr.Column():
             output_box_event_type = gr.Textbox(label="Event type:", interactive=False)
-            output_box_entities = gr.JSON(label="Extracted entities:", interactive=False)
             output_box_graph = gr.JSON(label="Event graph:", interactive=False)
+            output_box_entities = gr.JSON(label="Extracted entities:", interactive=False)
 
     # Functions
     getTweetButton.click(fn=TwitterFunctions.getTweet, inputs=twitter_input_box, outputs=input_box)  
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_entities, output_box_graph])
+    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_graph, output_box_entities])
