@@ -1,3 +1,2 @@
 gradio==3.13.1  
-tweepy
-python-dotenv
+gdeltdoc
