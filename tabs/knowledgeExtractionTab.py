@@ -1,7 +1,7 @@
 from typing import List
 import gradio as gr
 from pipelines import KnowledgeExtractionPipeline
-from twitter import TwitterFunctions
+from feeds import TwitterFunctions
 
 knowledgeExtractionPipeline = KnowledgeExtractionPipeline()
 twitterFunctions = TwitterFunctions()

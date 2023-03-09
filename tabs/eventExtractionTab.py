@@ -1,6 +1,7 @@
 import gradio as gr
 import requests
-from twitter import TwitterFunctions
+from feeds import GdeltFunctions
+
 
 def ee(q):
     try:
@@ -21,6 +22,7 @@ examples=[
 description = """- Event Detector: crisis-related LM + supervised contrastive learning on TREC-IS dataset.
                  - Entity Linker: BLINK-based linker
                  - (paste the extracted event graph [here](https://json-ld.org/playground) to see the visualization!)"""
+api = GdeltFunctions()
 
 with gr.Blocks() as eventExtractionTab:
     with gr.Row():
@@ -31,9 +33,9 @@ with gr.Blocks() as eventExtractionTab:
             input_box = gr.TextArea(label='Input text')    
             with gr.Accordion("Examples", open=False):
                 gr.Examples(examples, inputs=input_box, label='')
-            with gr.Accordion("Get examples from Twitter", open=False, visible=True):
-                twitter_input_box = gr.Text(label='Query for Tweets')
-                getTweetButton = gr.Button("Query Tweet")
+            with gr.Accordion("Get examples from Gdelt", open=False, visible=True):
+                feeds_input_box = gr.Text(label='Query for Feeds')
+                getFeedButton = gr.Button("Query Feed")
             with gr.Row():
                 with gr.Column():
                     delete_input_button = gr.Button("Delete", elem_id='delete')
@@ -47,6 +49,6 @@ with gr.Blocks() as eventExtractionTab:
             output_box_entities = gr.JSON(label="Extracted entities:", interactive=False)
 
     # Functions
-    getTweetButton.click(fn=TwitterFunctions.getTweet, inputs=twitter_input_box, outputs=input_box)  
+    getFeedButton.click(fn=api.get_feed, inputs=feeds_input_box, outputs=input_box)
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
     runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_graph, output_box_entities])
