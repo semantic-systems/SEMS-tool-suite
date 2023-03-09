@@ -1,10 +1,9 @@
-from typing import List
 import gradio as gr
 from pipelines import KnowledgeExtractionPipeline
-from feeds import TwitterFunctions
+from feeds import GdeltFunctions
 
 knowledgeExtractionPipeline = KnowledgeExtractionPipeline()
-twitterFunctions = TwitterFunctions()
+api = GdeltFunctions()
 
 
 def callPipeline(inputText: str, model: str):
@@ -18,9 +17,9 @@ with gr.Blocks() as knowledgeExtractionTab:
     keInputText = gr.TextArea(label='Input text')
     with gr.Row():
         with gr.Column(scale=1):
-            tweetQueryText = gr.Text(label='Query for Tweets', elem_id='test')
+            feedQueryText = gr.Text(label='Query for Feeds', elem_id='test')
             with gr.Row():
-                getTweetButton = gr.Button("Query Tweet")
+                getFeedButton = gr.Button("Query Feed")
                 deleteTextButton = gr.Button("Delete")
 
         with gr.Column(scale=1):
@@ -34,8 +33,8 @@ with gr.Blocks() as knowledgeExtractionTab:
         gr.Label(label='Visualization of the constructed Knowledge Graph...')
 
     # Functions
-    getTweetButton.click(fn=twitterFunctions.getTweet,
-                         inputs=tweetQueryText, outputs=keInputText)
+    getFeedButton.click(fn=api.get_feed,
+                         inputs=feedQueryText, outputs=keInputText)
     deleteTextButton.click(fn=lambda: "", inputs=[], outputs=keInputText)
     runKEButton.click(fn=callPipeline, inputs=[
                       keInputText, dropdownKEModel], outputs=kgInJSONLD)

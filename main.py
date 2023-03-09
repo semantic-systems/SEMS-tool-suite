@@ -1,5 +1,5 @@
 import gradio as gr
-from tabs import *
+from tabs import kgVisualizationTab, eventExtractionTab, questionAnswerTab, esgEventExtractionTab
 
 title = "Coypu MoD"
 

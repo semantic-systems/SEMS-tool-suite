@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7b18ca0-0076-4421-adf5-043f1ab75e44" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/feeds/gdelt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tabs/esgEventDetectionTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabs/esgEventDetectionTab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tabs/eventExtractionTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabs/eventExtractionTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tabs/knowledgeExtractionTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabs/knowledgeExtractionTab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/feeds/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter/twitter.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678149941473</updated>
       <workItem from="1678149963545" duration="11289000" />
-      <workItem from="1678365190037" duration="5398000" />
+      <workItem from="1678365190037" duration="5993000" />
     </task>
     <servers />
   </component>
@@ -130,6 +124,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEMS_tool_suite$demo_boi.coverage" NAME="demo boi Coverage Results" MODIFIED="1678180619348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SEMS_tool_suite$twitter.coverage" NAME="twitter Coverage Results" MODIFIED="1678369957641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twitter" />
+    <SUITE FILE_PATH="coverage/SEMS_tool_suite$twitter.coverage" NAME="gdelt Coverage Results" MODIFIED="1678370727258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/feeds" />
   </component>
 </project>
