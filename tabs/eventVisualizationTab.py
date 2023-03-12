@@ -8,7 +8,7 @@ api = GdeltFunctions()
 
 def ee(q):
     descriptions = ""
-    sentences, description = api.get_feed(q)
+    sentences, description = api.get_feed_batch(q)
     descriptions += description
     try:
         url = 'http://event_visualizer_container:5281'
