@@ -48,11 +48,15 @@ with gr.Blocks() as eventVisualizationTab:
                 runEEButton = gr.Button("Submit", variant='primary')
         with gr.Row():
             output_box_description = gr.Markdown(label="Description")
-        with gr.Row().style(full_height=True):
+        with gr.Row():
             plot_cls = gr.Plot(label="Classification Result").style()
-        with gr.Row().style(height="24"):
+        with gr.Row():
+            gr.Markdown("Yet, your clustering algorithm might tell you another story.")
+        with gr.Row():
             plot_cluster = gr.Plot(label="Clustering Result").style()
-
+        with gr.Row():
+            gr.Markdown("...")
+            
         # Functions
         delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
         runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_description, plot_cls, plot_cluster])
