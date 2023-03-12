@@ -1,6 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from gdeltdoc import GdeltDoc, Filters
+from typing import Tuple, List
 
 
 class GdeltFunctions:

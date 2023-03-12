@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7b18ca0-0076-4421-adf5-043f1ab75e44" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tabs/eventVisualizationTab.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feeds/gdelt.py" beforeDir="false" afterPath="$PROJECT_DIR$/feeds/gdelt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tabs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabs/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tabs/esgEventDetectionTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabs/esgEventDetectionTab.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
