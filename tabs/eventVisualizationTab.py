@@ -24,7 +24,6 @@ def ee(q):
             json.dump(output.get('fig_cluster'), f)
         fig_cls = plotly.io.read_json("./fig_cls.json")
         fig_cluster = plotly.io.read_json("./fig_cluster.json")
-        print("fig_cls", fig_cls)
         return descriptions, fig_cls, fig_cluster
     except Exception as e:
         return e,e,e
@@ -37,7 +36,7 @@ with gr.Blocks() as eventVisualizationTab:
                   "- It queries 250 articles from GDELT (the max. for a single query in GDELT).\n"
                   "- Only articles written in English are selected for further analyses. \n "
                   "- Titles of the articles will be fed into the event type detector. \n"
-                  "- A unsupervised clustering algorithm takes sentence embeddings as input and output cluster assignments. \n"
+                  "- DBSCAN (eps=3, min_samples=2) is used to cluster sentence embeddings to compare with the event type classifier. \n"
                   "- Visualization of both the classified result and clustering result will be displayed.")
     # Inputs
     with gr.Column():
@@ -50,7 +49,7 @@ with gr.Blocks() as eventVisualizationTab:
         with gr.Row():
             output_box_description = gr.Markdown(label="Description")
         with gr.Row():
-            plot_cls = gr.Plot(label="Classification Result").style()
+            plot_cls = gr.Plot(label="Classification Result")
         with gr.Row():
             plot_cluster = gr.Plot(label="Clustering Result").style()
 
