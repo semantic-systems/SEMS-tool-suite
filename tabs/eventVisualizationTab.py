@@ -2,6 +2,7 @@ import gradio as gr
 import plotly
 import requests
 from feeds import GdeltFunctions
+import json
 
 
 api = GdeltFunctions()
@@ -17,8 +18,13 @@ def ee(q):
                         "- oos refers to an out-of-scope class.\n" \
                         "- DBSCAN is used as the clustering algorithm.\n" \
                         "- PC 1 and PC 2 refers to the first and the second principal components of the sentence embeddings, when reduced to two dimensions.\n"
-        fig_cls = plotly.io.read_json(output.get('fig_cls'))
-        fig_cluster = plotly.io.read_json(output.get('fig_cluster'))
+        with open("./fig_cls.json", "w") as f:
+            json.dump(output.get('fig_cls'), f)
+        with open("./fig_cluster.json", "w") as f:
+            json.dump(output.get('fig_cluster'), f)
+        fig_cls = plotly.io.read_json("./fig_cls.json")
+        fig_cluster = plotly.io.read_json("./fig_cluster.json")
+        print("fig_cls", fig_cls)
         return descriptions, fig_cls, fig_cluster
     except Exception as e:
         return e,e,e
