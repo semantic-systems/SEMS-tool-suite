@@ -32,7 +32,7 @@ def ee(q):
 with gr.Blocks() as eventVisualizationTab:
     with gr.Row():
         gr.Markdown(
-            value="This process takes about 10 seconds to complete. The following steps are executed if you click the submit botton. \n "
+            value="Please enter a keyword to search for news from GDELT. The following steps are executed if you click the submit botton. \n "
                   "- It queries 250 articles from GDELT (the max. for a single query in GDELT).\n"
                   "- Only articles written in English are selected for further analyses. \n "
                   "- Titles of the articles will be fed into the event type detector. \n"
@@ -48,9 +48,9 @@ with gr.Blocks() as eventVisualizationTab:
                 runEEButton = gr.Button("Submit", variant='primary')
         with gr.Row():
             output_box_description = gr.Markdown(label="Description")
-        with gr.Row():
-            plot_cls = gr.Plot(label="Classification Result")
-        with gr.Row():
+        with gr.Row().style(full_height=True):
+            plot_cls = gr.Plot(label="Classification Result").style()
+        with gr.Row().style(height="24"):
             plot_cluster = gr.Plot(label="Clustering Result").style()
 
         # Functions
