@@ -4,3 +4,4 @@ from .eventExtractionTab import eventExtractionTab
 from .maximumDamageTab import maximumDamageTab
 from .questionAnswerTab import questionAnswerTab
 from .esgEventDetectionTab import esgEventExtractionTab
+from .eventVisualizationTab import eventVisualizationTab

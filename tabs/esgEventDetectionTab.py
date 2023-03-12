@@ -2,6 +2,7 @@ import gradio as gr
 import requests
 from feeds import GdeltFunctions
 
+
 def ee(q):
     try:
         url = 'https://esg-classifier.skynet.coypu.org'
