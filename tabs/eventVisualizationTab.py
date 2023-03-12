@@ -7,14 +7,11 @@ api = GdeltFunctions()
 
 
 def ee(q):
-    descriptions = ""
-    sentences, description = api.get_feed_batch(q)
-    descriptions += description
     try:
         url = 'http://event_visualizer_container:5281'
         headers = {'Content-Type': 'application/json'}
-        output = requests.post(url, json={'message': sentences}, headers=headers).json()
-        descriptions += output.get('descriptions')
+        output = requests.post(url, json={'message': q}, headers=headers).json()
+        descriptions = output.get('descriptions')
         descriptions += "\n Note:\n " \
                         "- oos refers to an out-of-scope class.\n" \
                         "- DBSCAN is used as the clustering algorithm.\n" \
