@@ -3,6 +3,8 @@ import plotly
 import requests
 from feeds import GdeltFunctions
 import json
+import plotly.graph_objects as go
+import pandas as pd
 
 
 api = GdeltFunctions()
@@ -24,20 +26,41 @@ def ee(q):
             json.dump(output.get('fig_cluster'), f)
         fig_cls = plotly.io.read_json("./fig_cls.json")
         fig_cluster = plotly.io.read_json("./fig_cluster.json")
-        return descriptions, fig_cls, fig_cluster
+        fig_timeline = get_event_timeline_plot()
+        return descriptions, fig_cls, fig_cluster, fig_timeline
     except Exception as e:
-        return e,e,e
+        return e,e,e, e
+
+
+def get_event_timeline_plot():
+    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+    fig = go.Figure(go.Scatter(
+        x=df['Date'],
+        y=df['mavg']
+    ))
+
+    fig.update_xaxes(
+        rangeslider_visible=True,
+        tickformatstops=[
+
+            dict(dtickrange=[86400000, 604800000], value="%e. %b d"),
+            dict(dtickrange=[604800000, "M1"], value="%e. %b w"),
+            dict(dtickrange=["M1", "M12"], value="%b '%y M"),
+            dict(dtickrange=["M12", None], value="%Y Y")
+        ]
+    )
+    return fig
 
 
 with gr.Blocks() as eventVisualizationTab:
     with gr.Row():
         gr.Markdown(
-            value="Please enter a keyword to search for news from GDELT. The following steps are executed if you click the submit botton. \n "
-                  "- It queries 250 articles from GDELT (the max. for a single query in GDELT).\n"
-                  "- Only articles written in English are selected for further analyses. \n "
-                  "- Titles of the articles will be fed into the event type detector. \n"
-                  "- DBSCAN (eps=3, min_samples=2) is used to cluster sentence embeddings to compare with the event type classifier. \n"
-                  "- Visualization of both the classified result and clustering result will be displayed.")
+            value="Please enter a keyword to search for news from GDELT. The following steps will happen once you click the submit botton. \n "
+                  "- 250 articles are queried from the GDELT API, and only English articles are filtered in.\n"
+                  "- Titles of the articles are used as features. \n"
+                  "- DBSCAN (eps=3, min_samples=2) clusters the PCA-reduced features. \n"
+                  "- Visualization of both the classified and clustered result are displayed.")
     # Inputs
     with gr.Column():
         input_box = gr.Text(placeholder="Enter a keyword here...", label="Keyword to query GDELT")
@@ -52,11 +75,12 @@ with gr.Blocks() as eventVisualizationTab:
             plot_cls = gr.Plot(label="Classification Result").style()
         with gr.Row():
             gr.Markdown("Yet, your clustering algorithm might tell you another story.")
-        with gr.Row():
             plot_cluster = gr.Plot(label="Clustering Result").style()
         with gr.Row():
             gr.Markdown("...")
-            
+        with gr.Row():
+            plot_timeline = gr.Plot(label="Event Timeline").style()
+
         # Functions
         delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-        runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_description, plot_cls, plot_cluster])
+        runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_description, plot_cls, plot_cluster, plot_timeline])
