@@ -3,8 +3,6 @@ import plotly
 import requests
 from feeds import GdeltFunctions
 import json
-import plotly.graph_objects as go
-import pandas as pd
 
 
 api = GdeltFunctions()
@@ -26,31 +24,10 @@ def ee(q):
             json.dump(output.get('fig_cluster'), f)
         fig_cls = plotly.io.read_json("./fig_cls.json")
         fig_cluster = plotly.io.read_json("./fig_cluster.json")
-        fig_timeline = get_event_timeline_plot()
-        return descriptions, fig_cls, fig_cluster, fig_timeline
+        return descriptions, fig_cls, fig_cluster
     except Exception as e:
         return e,e,e, e
 
-
-def get_event_timeline_plot():
-    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-
-    fig = go.Figure(go.Scatter(
-        x=df['Date'],
-        y=df['mavg']
-    ))
-
-    fig.update_xaxes(
-        rangeslider_visible=True,
-        tickformatstops=[
-
-            dict(dtickrange=[86400000, 604800000], value="%e. %b d"),
-            dict(dtickrange=[604800000, "M1"], value="%e. %b w"),
-            dict(dtickrange=["M1", "M12"], value="%b '%y M"),
-            dict(dtickrange=["M12", None], value="%Y Y")
-        ]
-    )
-    return fig
 
 
 with gr.Blocks() as eventVisualizationTab:
@@ -72,15 +49,14 @@ with gr.Blocks() as eventVisualizationTab:
         with gr.Row():
             output_box_description = gr.Markdown(label="Description")
         with gr.Row():
-            plot_cls = gr.Plot(label="Classification Result").style()
-        with gr.Row():
-            gr.Markdown("Yet, your clustering algorithm might tell you another story.")
-            plot_cluster = gr.Plot(label="Clustering Result").style()
+            with gr.Column():
+                plot_cls = gr.Plot(label="Classification Result").style()
+            with gr.Column():
+                gr.Markdown("Yet, your clustering algorithm might tell you another story.")
+                plot_cluster = gr.Plot(label="Clustering Result").style()
         with gr.Row():
             gr.Markdown("...")
-        with gr.Row():
-            plot_timeline = gr.Plot(label="Event Timeline").style()
 
         # Functions
         delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-        runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_description, plot_cls, plot_cluster, plot_timeline])
+        runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_description, plot_cls, plot_cluster])
