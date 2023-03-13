@@ -29,13 +29,18 @@ def ee(q):
         return e,e,e, e
 
 
-
 with gr.Blocks() as eventVisualizationTab:
     with gr.Row():
         gr.Markdown(
-            value="Please enter a keyword to search for news from GDELT. The following steps will happen once you click the submit botton. \n "
+            value="Event visualizer in MoD aims to visualize news queired with a keyword from the past 24 hours. "
+                  "An event type classifier is used to generate the scatter plot (left), "
+                  "which offers a fast overview on the event types in the past 24 hours."
+                  "However, the classifier is not error-free. Therefore, a clustering algorithm is used to create "
+                  "event clusters as shown in the scatter plot (right)"
+                  " Please enter a keyword to search for news from GDELT. "
+                  "The following steps will happen once you click the submit botton. \n "
                   "- 250 articles are queried from the GDELT API, and only English articles are filtered in.\n"
-                  "- Titles of the articles are used as features. \n"
+                  "- Titles of the articles are used as features for the classifier and the clustering algorithm. \n"
                   "- DBSCAN (eps=3, min_samples=2) clusters the PCA-reduced features. \n"
                   "- Visualization of both the classified and clustered result are displayed.")
     # Inputs
@@ -52,10 +57,7 @@ with gr.Blocks() as eventVisualizationTab:
             with gr.Column():
                 plot_cls = gr.Plot(label="Classification Result").style()
             with gr.Column():
-                gr.Markdown("Yet, your clustering algorithm might tell you another story.")
                 plot_cluster = gr.Plot(label="Clustering Result").style()
-        with gr.Row():
-            gr.Markdown("...")
 
         # Functions
         delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
