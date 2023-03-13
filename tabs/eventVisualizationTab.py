@@ -34,15 +34,16 @@ with gr.Blocks() as eventVisualizationTab:
         gr.Markdown(
             value="Event visualizer in MoD aims to visualize news queired with a keyword from the past 24 hours. "
                   "An event type classifier is used to generate the scatter plot (left), "
-                  "which offers a fast overview on the event types in the past 24 hours."
+                  "which offers a fast overview on the event types in the past 24 hours. "
                   "However, the classifier is not error-free. Therefore, a clustering algorithm is used to create "
-                  "event clusters as shown in the scatter plot (right)"
+                  "event clusters as shown in the scatter plot (right)."
                   " Please enter a keyword to search for news from GDELT. "
                   "The following steps will happen once you click the submit botton. \n "
                   "- 250 articles are queried from the GDELT API, and only English articles are filtered in.\n"
                   "- Titles of the articles are used as features for the classifier and the clustering algorithm. \n"
                   "- DBSCAN (eps=3, min_samples=2) clusters the PCA-reduced features. \n"
-                  "- Visualization of both the classified and clustered result are displayed.")
+                  "- Visualization of both the classified and clustered result are displayed. \n"
+                  "(try \"Hamburg\" to see what happened in Hamburg in the past 24 hours!)")
     # Inputs
     with gr.Column():
         input_box = gr.Text(placeholder="Enter a keyword here...", label="Keyword to query GDELT")
