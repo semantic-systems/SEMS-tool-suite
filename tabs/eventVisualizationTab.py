@@ -1,27 +1,13 @@
-import webbrowser
-
 import gradio as gr
 import plotly
 import requests
 from feeds import GdeltFunctions
 import json
-from ipywidgets import Output
 
 
 api = GdeltFunctions()
 
-out = Output()
-@out.capture(clear_output=True)
-def do_click(trace, points, state):
-    print("hey i am here")
-    if points.point_inds:
-        print("hey you clicked me!")
-        ind = points.point_inds[0]
-        url = trace["customdata"][ind][1]
-        # url = df.link.iloc[ind]
-        webbrowser.open_new_tab(url)
 
-        
 def ee(q):
     try:
         url = 'http://event_visualizer_container:5281'
@@ -38,10 +24,6 @@ def ee(q):
             json.dump(output.get('fig_cluster'), f)
         fig_cls = plotly.io.read_json("./fig_cls.json")
         fig_cluster = plotly.io.read_json("./fig_cluster.json")
-        trace_cls = fig_cls.data[0]
-        trace_cluster = fig_cluster.data[0]
-        trace_cls.on_click(do_click)
-        trace_cluster.on_click(do_click)
         return descriptions, fig_cls, fig_cluster
     except Exception as e:
         return e, e, e
