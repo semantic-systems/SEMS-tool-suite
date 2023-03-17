@@ -32,7 +32,7 @@ def ee(q):
 with gr.Blocks() as eventVisualizationTab:
     with gr.Row():
         gr.Markdown(
-            value="Event visualizer in MoD aims to visualize news queired with a keyword from the past 24 hours. "
+            value="Event visualizer in MoD aims to visualize news queried with a keyword from the past 24 hours. "
                   "An event type classifier is used to generate the scatter plot (left), "
                   "which offers a fast overview on the event types in the past 24 hours. "
                   "However, the classifier is not error-free. Therefore, a clustering algorithm is used to create "
