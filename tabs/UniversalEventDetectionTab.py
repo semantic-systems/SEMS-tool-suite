@@ -27,9 +27,9 @@ scheme_examples=["Environmental event, Societal event, Governmental event",
 
 with gr.Blocks() as UniversalEventDetectorTab:
     with gr.Row():
-        gr.Markdown(f"Enter your a list of labels (separated by , ) in the 'scheme' field. \\"
-                    f"The Universal Event Detector (UED) will pay attention to them and try to do zero-shot classification for you.\\"
-                    f"The default value is 'Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'.\\"
+        gr.Markdown(f"Enter your a list of labels (separated by , ) in the 'scheme' field. \n"
+                    f"The Universal Event Detector (UED) will pay attention to them and try to do zero-shot classification for you.\n"
+                    f"The default value is 'Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'.\n"
                     f"Have fun!")
     with gr.Row():
         # Inputs
