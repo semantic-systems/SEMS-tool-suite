@@ -24,6 +24,7 @@ scheme_examples=["Environmental event, Societal event, Governmental event",
           "Feeling happy, Feeling sad, Feeling angry, Feeling melancholic, Feeling calm, Feeling like a child",
           "Exposition, Rising action, Climax, Falling action, Resolution"]
 
+api = GdeltFunctions()
 
 with gr.Blocks() as UniversalEventDetectorTab:
     with gr.Row():
@@ -58,7 +59,7 @@ with gr.Blocks() as UniversalEventDetectorTab:
             output_box_label = gr.JSON(label="Label:", interactive=False)
 
     # Functions
-    getFeedButton.click(fn=GdeltFunctions.get_feed, inputs=twitter_input_box, outputs=input_box)
+    getFeedButton.click(fn=api.get_feed, inputs=twitter_input_box, outputs=input_box)
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
     delete_scheme_button.click(fn=lambda:"", inputs=[], outputs=scheme_box)
     runEEButton.click(fn=utc, inputs=[input_box, scheme_box], outputs=output_box_label)
