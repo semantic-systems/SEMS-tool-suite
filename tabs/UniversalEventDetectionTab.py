@@ -27,14 +27,15 @@ scheme_examples=["Environmental event, Societal event, Governmental event",
 
 with gr.Blocks() as UniversalEventDetectorTab:
     with gr.Row():
-        gr.Markdown(f"Enter your a list of labels (separated by , ) in the 'scheme' field. The Universal Event Detector (UED) will pay attention to them and try to do zero-shot classification for you."
-                    f"The default value is 'Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'."
+        gr.Markdown(f"Enter your a list of labels (separated by , ) in the 'scheme' field. \\"
+                    f"The Universal Event Detector (UED) will pay attention to them and try to do zero-shot classification for you.\\"
+                    f"The default value is 'Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'.\\"
                     f"Have fun!")
     with gr.Row():
         # Inputs
         with gr.Column():
             input_box = gr.TextArea(label='Input text')    
-            scheme_box = gr.TextArea(label='Scheme')
+            scheme_box = gr.TextArea(label='Scheme', placeholder="Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation")
             with gr.Accordion("Text Examples", open=False):
                 gr.Examples(text_examples, inputs=input_box, label='')
             with gr.Accordion("Scheme Examples", open=False):
@@ -44,9 +45,9 @@ with gr.Blocks() as UniversalEventDetectorTab:
                 getFeedButton = gr.Button("Query Feed")
             with gr.Row():
                 with gr.Column():
-                    delete_input_button = gr.Button("Delete", elem_id='delete')
+                    delete_input_button = gr.Button("Delete text", elem_id='delete')
                 with gr.Column():
-                    delete_scheme_button = gr.Button("Delete", elem_id='delete')
+                    delete_scheme_button = gr.Button("Delete scheme", elem_id='delete')
                 with gr.Column():
                     runEEButton = gr.Button("Run UED", variant='primary')
 
