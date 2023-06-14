@@ -3,24 +3,27 @@ import requests
 from feeds import GdeltFunctions
 
 
-def ee(q):
+def utc(message, scheme):
     try:
-        url = 'https://esg-classifier.skynet.coypu.org'
+        url = 'https://sc.hitec.skynet.coypu.org'
         headers = {'Content-Type': 'application/json'}
-        output = requests.post(url, json={'message': q, "key": "4QT4B4JNCL5SLJM5"}, headers=headers).json()
-        return output.get('label'), output.get('wikidata')
+        output = requests.post(url, json={'message': message, "key": "GBGBE3THWLF9FB2U", "scheme": scheme}, headers=headers).json()
+        return output
     except Exception as e:
-        return e,e
+        return e
+
 
 examples=["\"One-in-100-year flood event\" devastates Western Australia",
           "118th United States Congress convenes; House of Representatives adjourns without electing Speaker for first time in 100 years.",
           "UK Treasury considering plans for digital pound, economic secretary says.",
           "Troops freed by Mali return to Ivory Coast."]
-api = GdeltFunctions()
 
-with gr.Blocks() as esgEventExtractionTab:
+
+with gr.Blocks() as UniversalEventDetectorTab:
     with gr.Row():
-        gr.Markdown(f"- Single label classification on ESG events")
+        gr.Markdown(f"Enter your a list of labels (separated by , ) in the 'scheme' field. The Universal Event Detector (UED) will pay attention to them and try to do zero-shot classification for you."
+                    f"The default value is 'Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'."
+                    f"Have fun!")
     with gr.Row():
         # Inputs
         with gr.Column():
@@ -34,14 +37,13 @@ with gr.Blocks() as esgEventExtractionTab:
                 with gr.Column():
                     delete_input_button = gr.Button("Delete", elem_id='delete')
                 with gr.Column():
-                    runEEButton = gr.Button("Run Event Extraction", variant='primary')
+                    runEEButton = gr.Button("Run UED", variant='primary')
 
         # Results
         with gr.Column():
-            output_box_event_type = gr.Textbox(label="Event type:", interactive=False)
-            output_box_event_type_link = gr.Textbox(label="Event type link:", interactive=False)
+            output_box_label = gr.JSON(label="Label:", interactive=False)
 
     # Functions
-    getFeedButton.click(fn=api.get_feed, inputs=twitter_input_box, outputs=input_box)
+    getFeedButton.click(fn=GdeltFunctions.get_feed, inputs=twitter_input_box, outputs=input_box)
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_event_type_link])
+    runEEButton.click(fn=utc, inputs=input_box, outputs=output_box_label)
