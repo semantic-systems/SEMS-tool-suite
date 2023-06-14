@@ -3,7 +3,7 @@ import requests
 from feeds import GdeltFunctions
 
 
-def utc(message, scheme):
+def utc(message, scheme='Earthquake, Flooding, Tropical storm, Explosion, Shooting, Wildfire, Hostage, Pandemic, War, Inflation'):
     try:
         url = 'https://sc.hitec.skynet.coypu.org'
         headers = {'Content-Type': 'application/json'}
