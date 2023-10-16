@@ -5,9 +5,9 @@ from feeds import GdeltFunctions
 
 def ee(q):
     try:
-        url = 'http://event_extractor_test:5278'
+        url = 'https://event-extraction.skynet.coypu.org'
         headers = {'Content-Type': 'application/json'}
-        output = requests.post(url, json={'message': q}, headers=headers).json()
+        output = requests.post(url, json={'message': q, 'key': '32T82GWPSGDJTKFN'}, headers=headers).json()
         return output.get('event type'), output.get('event graph'), output.get('event arguments')
     except Exception as e:
         return e,e,e
