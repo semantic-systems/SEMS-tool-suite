@@ -1,6 +1,7 @@
 import gradio as gr
 import requests
 from feeds import GdeltFunctions
+from helpers import visualization
 
 
 def ee(q):
@@ -8,9 +9,10 @@ def ee(q):
         url = 'https://event-extraction.skynet.coypu.org'
         headers = {'Content-Type': 'application/json'}
         output = requests.post(url, json={'message': q, 'key': '32T82GWPSGDJTKFN'}, headers=headers).json()
-        return output.get('event type'), output.get('event graph'), output.get('event arguments')
+        return output.get('event type'), visualization(output.get('event graph')), output.get('event graph'), output.get('event arguments')
     except Exception as e:
-        return e,e,e
+        return e,e,e,e
+
 
 examples=[
     "A preliminary 6.20 magnitude #earthquake has occurred near Taft, Eastern Visayas, #Philippines.",
@@ -45,10 +47,11 @@ with gr.Blocks() as eventExtractionTab:
         # Results
         with gr.Column():
             output_box_event_type = gr.Textbox(label="Event type:", interactive=False)
+            output_box_graph_vis = gr.outputs.HTML(label="Visualization:")
             output_box_graph = gr.JSON(label="Event graph:", interactive=False)
             output_box_entities = gr.JSON(label="Extracted entities:", interactive=False)
 
     # Functions
     getFeedButton.click(fn=api.get_feed, inputs=feeds_input_box, outputs=input_box)
     delete_input_button.click(fn=lambda:"", inputs=[], outputs=input_box)
-    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_graph, output_box_entities])
+    runEEButton.click(fn=ee, inputs=input_box, outputs=[output_box_event_type, output_box_graph_vis, output_box_graph, output_box_entities])

@@ -13,12 +13,12 @@ with gr.Blocks(css="#row {height: 100%} .gradio-container {background-color: #E8
     #    knowledgeExtractionTab.render()
     with gr.Tab('Event Extraction'):
         eventExtractionTab.render()
-    with gr.Tab('Event Visualization'):
-        eventVisualizationTab.render()
+    # with gr.Tab('Event Visualization'):
+    #     eventVisualizationTab.render()
     #with gr.Tab('Maximum Damage'):
     #    maximumDamageTab.render()
-    with gr.Tab('Question Answering'):
-        questionAnswerTab.render()
+    # with gr.Tab('Question Answering'):
+    #     questionAnswerTab.render()
     with gr.Tab('Universal Event Detection'):
         UniversalEventDetectorTab.render()
     
