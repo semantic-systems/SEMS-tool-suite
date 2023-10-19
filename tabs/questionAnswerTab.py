@@ -25,7 +25,7 @@ def qa(question):
                                                 "content": reforumated_question}],
                                 temperature = 0.1,
                                 max_tokens = 120).json()
-        return request[0].get('choices')[0].get("message")
+        return request[0].get('choices')[0].get("message").get("content")
     except Exception as e:
         return e
 
