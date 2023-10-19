@@ -25,9 +25,9 @@ def qa(question):
                                                 "content": reforumated_question}],
                                 temperature = 0.1,
                                 max_tokens = 120).json()
-        return request[0].get('choices')[0].get("message").get("content")
+        return reforumated_question, request[0].get('choices')[0].get("message").get("content")
     except Exception as e:
-        return e
+        return e, e
 
 
 with gr.Blocks() as questionAnswerTab:
@@ -40,6 +40,6 @@ with gr.Blocks() as questionAnswerTab:
             qaRun = gr.Button(variant='primary')
         with gr.Column():
             answer_box = gr.JSON(label='Answer', interactive=False)
-            sparql_box = gr.JSON(label='SPARQL', interactive=False)
+            reformulated_question_box = gr.JSON(label='Reformulated question', interactive=False)
 
-    qaRun.click(fn=qa, inputs=question_box, outputs=[answer_box, sparql_box])
+    qaRun.click(fn=qa, inputs=question_box, outputs=[reformulated_question_box, answer_box])
