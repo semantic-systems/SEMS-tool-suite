@@ -36,20 +36,20 @@ def qa(question):
         return e, e
 
 
-# with gr.Blocks() as questionAnswerTab:
-#     with gr.Row():
-#         gr.Markdown(f"{description}")
-#     with gr.Row():
-#         with gr.Column():
-#             question_box = gr.TextArea(label='Question')
-#             gr.Examples(examples, inputs=question_box, label='Example questions')
-#             qaRun = gr.Button(variant='primary')
-#         with gr.Column():
-#             answer_box = gr.JSON(label='Answer', interactive=False)
-#             reformulated_question_box = gr.JSON(label='Reformulated question', interactive=False)
-#
-#     qaRun.click(fn=qa, inputs=question_box, outputs=[reformulated_question_box, answer_box])
+with gr.Blocks() as questionAnswerTab:
+    with gr.Row():
+        gr.Markdown(f"{description}")
+    with gr.Row():
+        with gr.Column():
+            question_box = gr.TextArea(label='Question')
+            gr.Examples(examples, inputs=question_box, label='Example questions')
+            qaRun = gr.Button(variant='primary')
+        with gr.Column():
+            answer_box = gr.JSON(label='Answer', interactive=False)
+            reformulated_question_box = gr.JSON(label='Reformulated question', interactive=False)
+
+    qaRun.click(fn=qa, inputs=question_box, outputs=[reformulated_question_box, answer_box])
 
 
-if __name__ == "__main__":
-    qa("What is the population of Germany?")
+# if __name__ == "__main__":
+#     qa("What is the population of Germany?")
