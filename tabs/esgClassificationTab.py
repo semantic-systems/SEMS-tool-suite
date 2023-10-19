@@ -30,10 +30,9 @@ with gr.Blocks() as esgClassificationTab:
     with gr.Row():
         with gr.Column():
             input_box = gr.TextArea(label='Input text')
-            gr.Examples(examples, inputs=question_box, label='Example text')
+            gr.Examples(examples, inputs=input_box, label='Example text')
             esgRun = gr.Button(variant='primary')
         with gr.Column():
-            # reformulated_question_box = gr.JSON(label='Reformulated question', interactive=False)
             answer_box = gr.JSON(label='Result', interactive=False)
 
     esgRun.click(fn=esg, inputs=input_box, outputs=[answer_box])
