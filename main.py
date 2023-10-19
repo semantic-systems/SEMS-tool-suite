@@ -1,5 +1,5 @@
 import gradio as gr
-from tabs import kgVisualizationTab, eventExtractionTab, questionAnswerTab, UniversalEventDetectorTab, eventVisualizationTab
+from tabs import kgVisualizationTab, eventExtractionTab, questionAnswerTab, UniversalEventDetectorTab, eventVisualizationTab, esgClassificationTab
 
 title = "Coypu MoD"
 
@@ -15,12 +15,12 @@ with gr.Blocks(css="#row {height: 100%} .gradio-container {background-color: #E8
         eventExtractionTab.render()
     # with gr.Tab('Event Visualization'):
     #     eventVisualizationTab.render()
-    #with gr.Tab('Maximum Damage'):
-    #    maximumDamageTab.render()
     with gr.Tab('Question Answering'):
         questionAnswerTab.render()
     with gr.Tab('Universal Event Detection'):
         UniversalEventDetectorTab.render()
+    with gr.Tab('ESG Classification'):
+        esgClassificationTab.render()
     
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0")

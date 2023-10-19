@@ -5,3 +5,4 @@ from .maximumDamageTab import maximumDamageTab
 from .questionAnswerTab import questionAnswerTab
 from .UniversalEventDetectionTab import UniversalEventDetectorTab
 from .eventVisualizationTab import eventVisualizationTab
+from .esgClassificationTab import esgClassificationTab
