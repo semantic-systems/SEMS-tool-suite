@@ -9,17 +9,25 @@ examples=[
     "Where is the birthplace of Angela Merkel?"
     ]
 
-description = """- Elasticsearch indexer over DBpedia
-                 - Name Entity Recognition -> Entity Linking and Relation Linking -> Query Generation"""
+description = """- Vicuna 1.5-based QA system """
 
 
 def qa(question):
     try:
-        url = 'http://tebaqa-controller:8080/qa-simple'
-        request = requests.post(url, data={"query": question, "lang": "en"}).json()
-        return request.get('answers'), request.get('sparql')
+        url = 'https://turbo.skynet.coypu.org/'
+        request = requests.post(url, messages=[{"role": "user",
+               "content": f"You are a question answering system expert. Please reformulate the following sentence into a reasonable question for a LLM."
+                          "/n/n question /n/n "}],
+                                temperature = 0.1
+                                ).json()
+        reforumated_question = request[0].get('choices')[0].get("message").get("content")
+        request = requests.post(url, messages=[{"role": "user",
+                                                "content": reforumated_question}],
+                                temperature = 0.1,
+                                max_tokens = 120).json()
+        return request[0].get('choices')[0].get("message")
     except Exception as e:
-        return e,e 
+        return e
 
 
 with gr.Blocks() as questionAnswerTab:
