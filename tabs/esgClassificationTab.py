@@ -17,7 +17,7 @@ def esg(question):
     try:
         url = 'https://turbo.skynet.coypu.org/'
         request = requests.post(url, json={"messages": [{"role": "user",
-                                                "content": f"Which class does the following text best fall into? Environmental_event, Societal_event, Governmental_event or out-of-scope? Note that out-of-scope refers to any class other than Environment, Social, Governance. Answer with a single word.\n\n{question}"}],
+                                                "content": f"Which class does the following text best fall into? Environmental event, Societal event, Governmental event or out-of-scope? Note that out-of-scope refers to any class other than Environment, Social, Governance. Answer with a single word.\n\n{question}"}],
                                 "temperature": 0.1,
                                 "max_new_tokens": 10,
                                  "key": "M7ZQL9ELMSDXXE86"}).json()
