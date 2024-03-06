@@ -3,32 +3,29 @@ import requests
 
 
 examples=[
-    "What is the capital of Denmark?",
-    "What is the population of Germany?",
-    "Of which country is Berlin the capital?",
-    "Where is the birthplace of Angela Merkel?"
+    "Does Tokyo have a sea port?",
+    "How many sea ports are there in China?",
+    "What is the risk level of Germany?",
+    "What is the international acronym of Saudi Arabia?"
     ]
 
-description = """- Vicuna 1.5-based QA system """
+description = """- SPARQL Structure Prediction
+                 - SPARQL Content Population -> Query Generation"""
 
 
-def qa(question):
+def qa(question, kb):
     try:
-        url = 'https://turbo.skynet.coypu.org/'
-        # request = requests.post(url, json={"messages": [{"role": "user",
-        #        "content": f"You are a question answering system expert. Please reformulate the following sentence into a reasonable question for a LLM. /n/n {question} /n/n "}],
-        #                         "temperature": 0.1,
-        #                         "key": "M7ZQL9ELMSDXXE86"
-        # }).json()
-        # reforumated_question = request[0].get('choices')[0].get("message").get("content")
-        request = requests.post(url, json={"messages": [{"role": "user",
-                                                "content": question}],
-                                "temperature": 0.1,
-                                "max_new_tokens": 120,
-                                 "key": "M7ZQL9ELMSDXXE86"}).json()
-        return request[0].get('choices')[0].get("message").get("content")
+        url = 'http://coypu_kgqa_container:12000/'
+        if kb == "CoyPuKG":
+            kb_val = "coypukg"
+        elif kb == "DBpedia":
+            kb_val = "dbpedia"
+        elif kb == "Freebase":
+            kb_val = "freebase"
+        request = requests.post(url, json={"text": question, "kb": kb_val}, headers={"Content-Type": "application/json"}).json()
+        return request.get('answers'), {"sparql": request.get('sparql')}
     except Exception as e:
-        return e
+        return e,e
 
 
 with gr.Blocks() as questionAnswerTab:
@@ -37,14 +34,13 @@ with gr.Blocks() as questionAnswerTab:
     with gr.Row():
         with gr.Column():
             question_box = gr.TextArea(label='Question')
+            kb_dropdown = gr.Dropdown(choices=["CoyPuKG"],
+                                      value="CoyPuKG",
+                                      label="Target KG")
             gr.Examples(examples, inputs=question_box, label='Example questions')
             qaRun = gr.Button(variant='primary')
         with gr.Column():
-            # reformulated_question_box = gr.JSON(label='Reformulated question', interactive=False)
             answer_box = gr.JSON(label='Answer', interactive=False)
+            sparql_box = gr.JSON(label='SPARQL', interactive=False)
 
-    qaRun.click(fn=qa, inputs=question_box, outputs=[answer_box])
-
-
-# if __name__ == "__main__":
-#     qa("What is the population of Germany?")
+    qaRun.click(fn=qa, inputs=[question_box, kb_dropdown], outputs=[answer_box, sparql_box])
