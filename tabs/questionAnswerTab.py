@@ -6,7 +6,10 @@ examples=[
     "Does Tokyo have a sea port?",
     "How many sea ports are there in China?",
     "What is the risk level of Germany?",
-    "What is the international acronym of Saudi Arabia?"
+    "What is the international acronym of Saudi Arabia?",
+    "Is there currently a natural disaster in Italy?",
+    "How many nuclear power plants are in Ukraine?",
+    "How many ports have 'fuel oil' supplies available?"
     ]
 
 description = """- SPARQL Structure Prediction
@@ -22,7 +25,7 @@ def qa(question, kb):
             kb_val = "dbpedia"
         elif kb == "Freebase":
             kb_val = "freebase"
-        request = requests.post(url, json={"text": question, "kb": kb_val}, headers={"Content-Type": "application/json"}).json()
+        request = requests.post(url, json={"text": question, "kb": kb_val, "key": "MFUEXPA5E584JMBA"}, headers={"Content-Type": "application/json"}).json()
         return request.get('answers'), {"sparql": request.get('sparql')}
     except Exception as e:
         return e,e
