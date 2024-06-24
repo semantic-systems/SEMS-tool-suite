@@ -10,18 +10,19 @@ examples=[
     "Eliminating Deforestation : Hershey commits to eliminating commodity-driven deforestation from our entire supply chain by 2030 while respecting and protecting the human rights of individuals. Guided by our No Deforestation Policy, we will work within our individual commodity supply chains to drive sustainable practices with our suppliers and within the industry to achieve this.",
     ]
 
-description = """- Vicuna 1.5-based ESG Classification (Classes: environmental event, societal event, governmental event and out-of-scope) """
+description = """- Llama 3-based ESG Classification (Classes: environmental event, societal event, governmental event and out-of-scope) 
+                 - Max. rate limit is 6 requests in 30 seconds."""
+
 
 
 def esg(question):
     try:
         url = 'https://turbo.skynet.coypu.org/'
-        request = requests.post(url, json={"messages": [{"role": "user",
+        response = requests.post(url, json={"messages": [{"role": "user",
                                                 "content": f"Which class does the following text best fall into? Environmental event, Societal event, Governmental event or out-of-scope? Note that out-of-scope refers to any class other than Environment, Social, Governance. Answer with a single word.\n\n{question}"}],
                                 "temperature": 0.1,
-                                "max_new_tokens": 10,
-                                 "key": "M7ZQL9ELMSDXXE86"}).json()
-        return request[0].get('choices')[0].get("message").get("content")
+                                "max_new_tokens": 10}).json()
+        return response.get("content")
     except Exception as e:
         return e
 
